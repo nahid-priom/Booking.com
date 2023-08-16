@@ -12,9 +12,11 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
-function Header({type}) {
+function Header({ type }) {
   const [openDate, setOpenDate] = useState(false);
+  const [destination, setDestination] = useState("");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -28,6 +30,7 @@ function Header({type}) {
     children: 0,
     room: 1,
   });
+  const navigate = useNavigate();
   const handleOption = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -36,10 +39,18 @@ function Header({type}) {
       };
     });
   };
+
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, date, options } });
+  };
   const [active, setActive] = useState(true);
   return (
     <div className=" bg-blue-900 text-white flex relative justify-center">
-      <div className={`w-full max-w-5xl mt-5 mr-0 ml-0 ${type === "list" ? 'mb-0': 'mb-24'}`}>
+      <div
+        className={`w-full max-w-5xl mt-5 mr-0 ml-0 ${
+          type === "list" ? "mb-0" : "mb-24"
+        }`}
+      >
         <div className="flex items-center gap-x-10 mb-10">
           <div
             className={`flex items-center rounded-3xl p-2.5 ${
@@ -66,7 +77,7 @@ function Header({type}) {
             <span className="ml-2">Airport Taxi</span>
           </div>
         </div>
-        {  type !== 'list' &&
+        {type !== "list" && (
           <>
             <h1 className="text-3xl font-bold ">
               A lifetime of discounts? It's Genius
@@ -81,7 +92,12 @@ function Header({type}) {
             <div className="w-full max-w-5xl h-14 bg-white border-2 border-yellow-500 flex items-center justify-around rounded py-5 absolute -bottom-7">
               <div className="flex items-center gap-2.5 border-0 outline-none">
                 <FontAwesomeIcon icon={faBed} className="bg-gray-500" />
-                <input type="text" placeholder="Where are you going?" />
+                <input
+                  onChange={(e) => setDestination(e.target.value)}
+                  type="text"
+                  placeholder="Where are you going?"
+                  className="text-black"
+                />
               </div>
               <div className="flex items-center gap-2.5 border-0 outline-none">
                 <FontAwesomeIcon
@@ -103,6 +119,7 @@ function Header({type}) {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="absolute top-14 shadow-md shadow-gray-300 z-10"
+                    minDate={new Date()}
                   />
                 )}
               </div>
@@ -177,13 +194,16 @@ function Header({type}) {
                 )}
               </div>
               <div>
-                <button className="font-bold border-0 py-1 px-2.5 cursor-pointer rounded text-white bg-blue-500">
+                <button
+                  onClick={handleSearch}
+                  className="font-bold border-0 py-1 px-2.5 cursor-pointer rounded text-white bg-blue-500"
+                >
                   Search
                 </button>
               </div>
             </div>
           </>
-        }
+        )}
       </div>
     </div>
   );
