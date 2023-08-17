@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
 import format from "date-fns/format";
 import { DateRange } from "react-date-range";
+import SearchItem from "../../components/searchItem/SearchItem";
 
 const List = () => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const List = () => {
       <Header type="list" />
       <div className="flex justify-center mt-5">
         <div className="w-full max-w-5xl flex gap-5">
-          <div className="basis-1/4 bg-yellow-400 p-3 rounded-xl sticky top-2.5">
+          <div className="basis-1/4 h-max bg-yellow-400 p-3 rounded-xl sticky top-2.5">
             <h1 className="text-2xl font-bold text-gray-600 mb-2.5 ">Search</h1>
             <div className="flex flex-col my-2.5">
               <label className="font-bold text-gray-600">Destination</label>
@@ -90,7 +91,17 @@ const List = () => {
             </div>
             <button className="p-2.5 bg-blue-600 rounded my-4 w-full font-bold cursor-pointer text-white">Search</button>
           </div>
-          <div className="flex-3"></div>
+          <div className="basis-3/4">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+
+          </div>
         </div>
       </div>
     </div>
