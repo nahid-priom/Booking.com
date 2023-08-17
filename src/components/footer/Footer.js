@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-full max-w-5xl text-base">
+    <div className="w-full my-8 max-w-5xl text-base">
       <div className="w-full flex justify-between mb-12">
         <ul>
           <li className="mb-2.5 text-blue-900 cursor-pointer">Countries</li>
@@ -45,7 +45,7 @@ const Footer = () => {
           <li className="mb-2.5 text-blue-900 cursor-pointer">Hotels</li>
         </ul>
       </div>
-      <div className="mb-2.5">Copyright © 2023 Booking.com</div>
+      <div className="mb-1">Copyright © 2023 Booking.com</div>
     </div>
   );
 };
